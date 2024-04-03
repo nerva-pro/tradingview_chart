@@ -1,5 +1,5 @@
 // Assuming you're working in a browser environment that supports fetch and ReadableStream
-const streamingUrl = 'https://api.nerva.pro/tradingview/chart/streaming'
+const streamingUrl = 'https://api.nerva.pro/streaming/tradingview/chart/streaming'
 const channelToSubscription = new Map()
 
 // Format the date to a readable format
