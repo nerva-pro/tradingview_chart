@@ -23,6 +23,10 @@ function getCurrentTimezoneName() {
   return timeZone;
 }
 
+function cssBlobUrl() {
+    return `div[data-name="open-image-in-new-tab"],div[data-name="tweet-chart-image"],div[data-name="copy-link-to-the-chart-image"] { display: none; } `;
+}
+
 
 function TradingViewChart() {
   const systemTheme = useSystemTheme();
@@ -37,7 +41,7 @@ function TradingViewChart() {
         symbol: 'BTCUSDT',
         interval: '15' as ResolutionString,
         fullscreen: true,
-        debug: true,
+        debug: false,
         load_last_chart: true,
         study_count_limit: 200,
         theme: systemTheme,
@@ -50,6 +54,7 @@ function TradingViewChart() {
         auto_save_delay: 5,
         timezone: "Etc/UTC",
         overrides:{"mainSeriesProperties.showCountdown" : true},
+        custom_css_url: cssBlobUrl,
         widgetbar: { 
           details: true,
           watchlist: true,
