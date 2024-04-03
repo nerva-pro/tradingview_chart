@@ -93,9 +93,8 @@ const datafeed = {
             onHistoryCallback([], { noData: true })
             return
           }
-          // const bars = []          
-          const bars = new Array(periodParams.countBack);
-          for (let i = periodParams.countBack - 1; i > -1; i--) {
+          const bars = []
+          for (let i = 0; i < data.t.length; ++i) {
             let adjustedTime = new Date(data.t[i] * 1000);// - 3 * 60 * 60 * 1000);
             bars.push({
               time: adjustedTime.getTime(),
