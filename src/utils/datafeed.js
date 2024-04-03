@@ -1,6 +1,6 @@
 import { subscribeOnStream, unsubscribeFromStream } from './streaming.js'
 
-const API_ENDPOINT = 'https://api.nerva.pro/datafeed/tradingview/chart'
+const API_ENDPOINT = 'https://api.nerva.pro/tradingview/chart/'
 
 // Use it to keep a record of the most recent bar on the chart
 const lastBarsCache = new Map()
