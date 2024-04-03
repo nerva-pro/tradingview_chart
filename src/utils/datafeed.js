@@ -120,7 +120,7 @@ const datafeed = {
             })
           }
           // We call the onHistoryCallback with the bars array and noData:false flag
-          onHistoryCallback(bars, { noData: false })
+          onHistoryCallback(bars, { noData: true })
         })
         .catch((error) => {
           //console.log('[getBars]: Get error', error)
