@@ -1,0 +1,6 @@
+{
+    "rewrites": [
+      { "source": "/tradingview/:asset*", "destination": "https://market.vittaverse.com/:asset*" },
+      { "source": "/(.*)", "destination": "/" }
+    ]
+  }
