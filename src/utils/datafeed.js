@@ -38,7 +38,7 @@ const datafeed = {
       //     { name: "Commodity", value: "commodity" },
       //     { name: "Crypto", value: "crypto" }
       // ],
-      supported_resolutions: ["1","2","3","4","5","15","30","60","120","240","D","1D","1W"]
+      supported_resolutions: ["1","3","5","15","30","60","120","240","D","1D","1W"]
   }
     setTimeout(() => callback(configurationData));
   },
@@ -95,7 +95,7 @@ const datafeed = {
           }
           const bars = []
           for (let i = 0; i < data.t.length; ++i) {
-            let adjustedTime = new Date(data.t[i] * 1000 - 2 * 60 * 60 * 1000);
+            let adjustedTime = new Date(data.t[i] * 1000);// - 2 * 60 * 60 * 1000);
             // let adjustedTimestampInSeconds = Math.floor(adjustedTime.getTime() / 1000);
             // console.log(adjustedTime.getTime());
             bars.push({
