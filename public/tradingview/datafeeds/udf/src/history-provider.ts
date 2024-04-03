@@ -87,8 +87,8 @@ export class HistoryProvider {
 		const requestParams: RequestParams = {
 			symbol: symbolInfo.ticker || '',
 			resolution: resolution,
-			// from: periodParams.from,
-			// to: periodParams.to,
+			from: periodParams.from,
+			to: periodParams.to,
 		};
 		if (periodParams.countBack !== undefined) {
 			requestParams.countback = periodParams.countBack;
