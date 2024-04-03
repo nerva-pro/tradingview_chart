@@ -84,32 +84,42 @@ const datafeed = {
       response
         .json()
         .then((data) => {
+          // If the API didn't return any data, we return noData=true to the charting library
+          // We do this by checking the length of the ticker array from the response
           if (data.t.length === 0) {
-            let time = new Date(periodParams.to * 1000);
-            time.setUTCHours(0);
-            time.setUTCMinutes(0);
-            time.setUTCMilliseconds(0);
-            time.setUTCDate(time.getUTCDate() - 1);
+            // We need to adjust the end time to the previous day, because the charting library
+            // expects the bars to be in ascending order from oldest to newest
+            // let time = new Date(periodParams.to * 1000);
+            // time.setUTCHours(0);
+            // time.setUTCMinutes(0);
+            // time.setUTCMilliseconds(0);
+            // time.setUTCDate(time.getUTCDate() - 1);
             onHistoryCallback([], { noData: true })
-            return
+            return // Return early to prevent creating any bars
           }
+          // If the API did return data, we create an array of bars from the response
           const bars = []
           for (let i = 0; i < data.t.length; ++i) {
+            // We need to adjust the bar time to UTC, because the charting library
+            // expects the bars to be in UTC time
             let adjustedTime = new Date(data.t[i] * 1000);// - 3 * 60 * 60 * 1000);
+            // We push each bar into the bars array
             bars.push({
-              time: adjustedTime.getTime(),
-              low: data.l[i],
+              time: adjustedTime.getTime(), // We use getTime() to convert the Date to a number of milliseconds since the Unix epoch
+              low: data.l[i], // These are the low, high, open, close and volume values from the API response
               high: data.h[i],
               open: data.o[i],
               close: data.c[i],
               volume: data.v[i],
             })
           }
+          // If this is the first data request for this symbol, we store the most recent bar in the cache
           if (firstDataRequest) {
             lastBarsCache.set(symbolInfo.ticker, {
-              ...bars[bars.length - 1],
+              ...bars[bars.length - 1], // We use spread syntax to create a new object with the properties of the last bar
             })
           }
+          // We call the onHistoryCallback with the bars array and noData:false flag
           onHistoryCallback(bars, { noData: false })
         })
         .catch((error) => {
