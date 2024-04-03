@@ -94,7 +94,7 @@ const datafeed = {
           //   return
           // }
           const bars = []
-          for (let i = 0; i < data.t.length; ++i) {
+          for (let i = 0; i < 999; ++i) {
             let adjustedTime = new Date(data.t[i] * 1000);// - 3 * 60 * 60 * 1000);
             bars.push({
               time: adjustedTime.getTime(),
