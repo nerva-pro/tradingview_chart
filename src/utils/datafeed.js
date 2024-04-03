@@ -84,15 +84,15 @@ const datafeed = {
       response
         .json()
         .then((data) => {
-          // if (data.t.length === 0) {
-          //   let time = new Date(periodParams.to * 1000);
-          //   time.setUTCHours(0);
-          //   time.setUTCMinutes(0);
-          //   time.setUTCMilliseconds(0);
-          //   time.setUTCDate(time.getUTCDate() - 1);
-          //   onHistoryCallback([], { noData: true })
-          //   return
-          // }
+          if (data.t.length === 0) {
+            let time = new Date(periodParams.to * 1000);
+            time.setUTCHours(0);
+            time.setUTCMinutes(0);
+            time.setUTCMilliseconds(0);
+            time.setUTCDate(time.getUTCDate() - 1);
+            onHistoryCallback([], { noData: true })
+            return
+          }
           const bars = []
           for (let i = 0; i < 999; ++i) {
             let adjustedTime = new Date(data.t[i] * 1000);// - 3 * 60 * 60 * 1000);
@@ -105,11 +105,11 @@ const datafeed = {
               volume: data.v[i],
             })
           }
-          // if (firstDataRequest) {
-          //   lastBarsCache.set(symbolInfo.ticker, {
-          //     ...bars[bars.length - 1],
-          //   })
-          // }
+          if (firstDataRequest) {
+            lastBarsCache.set(symbolInfo.ticker, {
+              ...bars[bars.length - 1],
+            })
+          }
           onHistoryCallback(bars, { noData: false })
         })
         .catch((error) => {
