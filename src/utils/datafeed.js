@@ -29,15 +29,15 @@ const datafeed = {
       //     { value: "NasdaqNM", name: "NasdaqNM", desc: "NasdaqNM" },
       //     { value: "NYSE", name: "NYSE", desc: "NYSE" }
       // ],
-      // symbols_types: [
-      //     { name: "All types", value: "" },
-      //     { name: "Stock", value: "stock" },
-      //     { name: "Index", value: "index" },
-      //     { name: "Forex", value: "forex" },
-      //     { name: "ETF", value: "ETFS" },
-      //     { name: "Commodity", value: "commodity" },
-      //     { name: "Crypto", value: "crypto" }
-      // ],
+      symbols_types: [
+          { name: "USDT", value: "USDT" },
+          { name: "BTC", value: "BTC" },
+          // { name: "Index", value: "index" },
+          // { name: "Forex", value: "forex" },
+          // { name: "ETF", value: "ETFS" },
+          // { name: "Commodity", value: "commodity" },
+          // { name: "Crypto", value: "crypto" }
+      ],
       supported_resolutions: ["1","3","5","15","30","60","120","240","360","480","720","D","1D","3D","1W","1M"]
   }
     setTimeout(() => callback(configurationData));
