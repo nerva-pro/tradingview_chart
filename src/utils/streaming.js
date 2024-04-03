@@ -2,6 +2,18 @@
 const streamingUrl = 'https://api.nerva.pro/tradingview/chart/streaming'
 const channelToSubscription = new Map()
 
+// Format the date to a readable format
+const options = {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  timeZoneName: 'short'
+};
+
+
 function handleStreamingData(data) {
   const { id, p, t } = data
 
@@ -10,32 +22,75 @@ function handleStreamingData(data) {
 
   const channelString = id
   const subscriptionItem = channelToSubscription.get(channelString)
-
+  // console.log('subscriptionItem : '+JSON.stringify(subscriptionItem, null, 2))
   if (!subscriptionItem) {
     return
   }
+  const options = {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  };
+  
+  const resolution = parseInt(subscriptionItem.resolution);
+  const lastDailyBar = subscriptionItem.lastDailyBar;
+  const nextDailyBarTime = getNextDailyBarTime(lastDailyBar.time);
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  
+  const lastDailyBarFormatted = formatter.format(lastDailyBar.time) + ':00';
+  const nextDailyBarTimeFormatted = formatter.format(nextDailyBarTime) + ':00';
+  
+  // console.log('lastDailyBarFormatted: ' + lastDailyBarFormatted);
+  // console.log('nextDailyBarTimeFormatted: ' + nextDailyBarTimeFormatted);
+  
+  // Convert formatted time strings into timestamp integers
+  const getLastDailyBarTimestamp = (formattedTime) => {
+    const [hours, minutes, seconds] = formattedTime.split(':').map(Number);
+    const currentDate = new Date();
+    currentDate.setHours(hours, minutes, seconds, 0);
+    return currentDate.getTime();
+  };
 
-  const lastDailyBar = subscriptionItem.lastDailyBar
-  const nextDailyBarTime = getNextDailyBarTime(lastDailyBar.time)
+  let resolutionInMinutes = subscriptionItem.resolution;
 
+  if (resolution === '1D') {
+    resolutionInMinutes = 1440; // 1 day in minutes
+  } else if (resolution === '3D') {
+    resolutionInMinutes = 4320; // 1 week in minutes
+  } else if (resolution === '1W') {
+    resolutionInMinutes = 10080; // 1 week in minutes
+  } else if (resolution === '1M') {
+    resolutionInMinutes = 43200; // 1 month in minutes
+  } else {
+    resolutionInMinutes = resolution; // Use the original resolution value
+  }
+  const lastDailyBarTimestamp = getLastDailyBarTimestamp(lastDailyBarFormatted);
+  const nextDailyBarTimestamp = lastDailyBarTimestamp + (resolutionInMinutes * 60 * 1000);
+  
+  // console.log('lastDailyBarTimestamp: ' + lastDailyBarTimestamp);
+  // console.log('nextDailyBarTimestamp: ' + nextDailyBarTimestamp);
+  // console.log('Using resolution in minutes:', resolutionInMinutes);
+  
+
+  
   let bar
-  if (tradeTime >= nextDailyBarTime) {
+  if (tradeTime >= nextDailyBarTimestamp) {
     bar = {
-      time: nextDailyBarTime,
+      time: nextDailyBarTimestamp,
       open: tradePrice,
       high: tradePrice,
       low: tradePrice,
       close: tradePrice,
     }
-    console.log('[stream] Generate new bar', bar)
+    // console.log('[stream] Generate new bar', bar)
   } else {
     bar = {
       ...lastDailyBar,
-      high: Math.max(lastDailyBar.high, tradePrice),
-      low: Math.min(lastDailyBar.low, tradePrice),
+      high: Math.max(lastDailyBar.high, lastDailyBar.close),
+      low: Math.min(lastDailyBar.low, lastDailyBar.close),
       close: tradePrice,
     }
-    console.log('[stream] Update the latest bar by price', tradePrice)
+    // console.log('[stream] Update the latest bar by price', tradePrice)
   }
 
   subscriptionItem.lastDailyBar = bar
@@ -46,7 +101,11 @@ function handleStreamingData(data) {
 }
 
 function startStreaming(retries = 3, delay = 3000) {
-  fetch(streamingUrl)
+  fetch(streamingUrl,{
+    headers: new Headers({
+        "ngrok-skip-browser-warning": "69420",
+      }),
+  })
     .then((response) => {
       const reader = response.body.getReader()
 
@@ -55,7 +114,7 @@ function startStreaming(retries = 3, delay = 3000) {
           .read()
           .then(({ value, done }) => {
             if (done) {
-              console.error('[stream] Streaming ended.')
+              // console.error('[stream] Streaming ended.')
               return
             }
 
@@ -68,7 +127,7 @@ function startStreaming(retries = 3, delay = 3000) {
                   var jsonData = JSON.parse(trimmedDataString)
                   handleStreamingData(jsonData)
                 } catch (e) {
-                  console.error('Error parsing JSON:', e.message)
+                  // console.error('Error parsing JSON:', e.message)
                 }
               }
             })
@@ -76,7 +135,7 @@ function startStreaming(retries = 3, delay = 3000) {
             streamData() // Continue processing the stream
           })
           .catch((error) => {
-            console.error('[stream] Error reading from stream:', error)
+            // console.error('[stream] Error reading from stream:', error)
             attemptReconnect(retries, delay)
           })
       }
@@ -85,18 +144,18 @@ function startStreaming(retries = 3, delay = 3000) {
     })
     .catch((error) => {
       console.error(
-        '[stream] Error fetching from the streaming endpoint:',
+        // '[stream] Error fetching from the streaming endpoint:',
         error
       )
     })
   function attemptReconnect(retriesLeft, delay) {
     if (retriesLeft > 0) {
-      console.log(`[stream] Attempting to reconnect in ${delay}ms...`)
+      // console.log(`[stream] Attempting to reconnect in ${delay}ms...`)
       setTimeout(() => {
         startStreaming(retriesLeft - 1, delay)
       }, delay)
     } else {
-      console.error('[stream] Maximum reconnection attempts reached.')
+      // console.error('[stream] Maximum reconnection attempts reached.')
     }
   }
 }
@@ -128,10 +187,10 @@ export function subscribeOnStream(
     handlers: [handler],
   }
   channelToSubscription.set(channelString, subscriptionItem)
-  console.log(
-    '[subscribeBars]: Subscribe to streaming. Channel:',
-    channelString
-  )
+  // console.log(
+  //   '[subscribeBars]: Subscribe to streaming. Channel:',
+  //   channelString
+  // )
 
   // Start streaming when the first subscription is made
   startStreaming()
@@ -147,10 +206,10 @@ export function unsubscribeFromStream(subscriberUID) {
 
     if (handlerIndex !== -1) {
       // Unsubscribe from the channel if it is the last handler
-      console.log(
-        '[unsubscribeBars]: Unsubscribe from streaming. Channel:',
-        channelString
-      )
+      // console.log(
+      //   '[unsubscribeBars]: Unsubscribe from streaming. Channel:',
+      //   channelString
+      // )
       channelToSubscription.delete(channelString)
       break
     }
