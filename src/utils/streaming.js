@@ -29,8 +29,7 @@ function handleStreamingData(data) {
   const options = {
     hour: '2-digit',
     minute: '2-digit',
-    second:'2-digit',
-    hour12: true
+    hour12: false
   };
   
   const resolution = parseInt(subscriptionItem.resolution);
@@ -38,8 +37,8 @@ function handleStreamingData(data) {
   const nextDailyBarTime = getNextDailyBarTime(lastDailyBar.time);
   const formatter = new Intl.DateTimeFormat('en-US', options);
   
-  const lastDailyBarFormatted = formatter.format(lastDailyBar.time);// + ':00';
-  const nextDailyBarTimeFormatted = formatter.format(nextDailyBarTime);// + ':00';
+  const lastDailyBarFormatted = formatter.format(lastDailyBar.time) + ':00';
+  const nextDailyBarTimeFormatted = formatter.format(nextDailyBarTime) + ':00';
   
   // console.log('lastDailyBarFormatted: ' + lastDailyBarFormatted);
   // console.log('nextDailyBarTimeFormatted: ' + nextDailyBarTimeFormatted);
