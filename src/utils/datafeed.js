@@ -30,7 +30,7 @@ const datafeed = {
       //     { value: "NYSE", name: "NYSE", desc: "NYSE" }
       // ],
       symbols_types: [
-          { name: "USDT", value: "USDT" },
+          { name: "USDT", value: "Crypto" },
           { name: "BTC", value: "BTC" },
           // { name: "Index", value: "index" },
           // { name: "Forex", value: "forex" },
