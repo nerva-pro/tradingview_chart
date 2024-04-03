@@ -23,10 +23,7 @@ function getCurrentTimezoneName() {
   return timeZone;
 }
 
-function cssBlobUrl() {
-    return `div[data-name="open-image-in-new-tab"],div[data-name="tweet-chart-image"],div[data-name="copy-link-to-the-chart-image"] { display: none; } `;
-}
-
+var customCSS = `div[data-name="open-image-in-new-tab"],div[data-name="tweet-chart-image"],div[data-name="copy-link-to-the-chart-image"] { display: none; } `;
 
 function TradingViewChart() {
   const systemTheme = useSystemTheme();
@@ -54,7 +51,6 @@ function TradingViewChart() {
         auto_save_delay: 5,
         timezone: "Etc/UTC",
         overrides:{"mainSeriesProperties.showCountdown" : true},
-        custom_css_url: cssBlobUrl,
         widgetbar: { 
           details: true,
           watchlist: true,
