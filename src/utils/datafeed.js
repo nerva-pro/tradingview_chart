@@ -94,7 +94,7 @@ const datafeed = {
             // time.setUTCMinutes(0);
             // time.setUTCMilliseconds(0);
             // time.setUTCDate(time.getUTCDate() - 1);
-            onHistoryCallback([], { noData: true })
+            onHistoryCallback([], { noData: false })
             return // Return early to prevent creating any bars
           }
           // If the API did return data, we create an array of bars from the response
@@ -120,7 +120,7 @@ const datafeed = {
             })
           }
           // We call the onHistoryCallback with the bars array and noData:false flag
-          onHistoryCallback(bars, { noData: true })
+          onHistoryCallback(bars, { noData: false })
         })
         .catch((error) => {
           //console.log('[getBars]: Get error', error)
