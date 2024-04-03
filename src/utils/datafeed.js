@@ -38,7 +38,7 @@ const datafeed = {
       //     { name: "Commodity", value: "commodity" },
       //     { name: "Crypto", value: "crypto" }
       // ],
-      supported_resolutions: ["1","3","5","15","30","60","120","240","D","1D","1W"]
+      supported_resolutions: ["1","3","5","15","30","60","120","240","D","1D","1W","1M"]
   }
     setTimeout(() => callback(configurationData));
   },
