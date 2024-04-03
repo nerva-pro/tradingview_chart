@@ -38,7 +38,7 @@ function TradingViewChart() {
         interval: '15' as ResolutionString,
         fullscreen: true,
         debug: false,
-        load_last_chart: true,
+        load_last_chart: false,
         study_count_limit: 200,
         theme: systemTheme,
         symbol_search_request_delay: 100,
