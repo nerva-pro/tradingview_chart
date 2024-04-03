@@ -62,9 +62,9 @@ function TradingViewChart() {
                             "use_na_string_for_not_available_values","confirm_overwrite_if_chart_layout_with_name_exists","create_volume_indicator_by_default","symbol_info_price_source",
                             "end_of_period_timescale_marks","header_in_fullscreen_mode","chart_template_storage",
                             "iframe_loading_compatibility_mode","side_toolbar_in_fullscreen_mode","study_symbol_ticker_description","volume_force_overlay","datasource_copypaste",
-                            "show_symbol_logo_in_legend","chart_style_hilo","charting_library_debug_mode",
+                            "show_symbol_logo_in_legend","chart_style_hilo","charting_library_debug_mode","disable_resolution_rebuild",
                             "move_logo_to_main_pane","header_saveload","study_templates","countdown"],
-        disabled_features: ["hide_main_series_symbol_from_indicator_legend","display_market_status","custom_resolutions","tick_resolution","disable_resolution_rebuild"]
+        disabled_features: ["hide_main_series_symbol_from_indicator_legend","display_market_status","custom_resolutions","tick_resolution"]
                             
       });
     }
