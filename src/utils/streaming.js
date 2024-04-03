@@ -37,8 +37,8 @@ function handleStreamingData(data) {
   const nextDailyBarTime = getNextDailyBarTime(lastDailyBar.time);
   const formatter = new Intl.DateTimeFormat('en-US', options);
   
-  const lastDailyBarFormatted = formatter.format(lastDailyBar.time) + ':00';
-  const nextDailyBarTimeFormatted = formatter.format(nextDailyBarTime) + ':00';
+  const lastDailyBarFormatted = formatter.format(lastDailyBar.time);// + ':00';
+  const nextDailyBarTimeFormatted = formatter.format(nextDailyBarTime);// + ':00';
   
   // console.log('lastDailyBarFormatted: ' + lastDailyBarFormatted);
   // console.log('nextDailyBarTimeFormatted: ' + nextDailyBarTimeFormatted);
