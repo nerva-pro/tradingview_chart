@@ -105,11 +105,11 @@ const datafeed = {
               volume: data.v[i],
             })
           }
-          if (firstDataRequest) {
-            lastBarsCache.set(symbolInfo.ticker, {
-              ...bars[bars.length - 1],
-            })
-          }
+          // if (firstDataRequest) {
+          //   lastBarsCache.set(symbolInfo.ticker, {
+          //     ...bars[bars.length - 1],
+          //   })
+          // }
           onHistoryCallback(bars, { noData: false })
         })
         .catch((error) => {
