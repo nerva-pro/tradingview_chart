@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div>
       <Head>
-        <title>Vittaverse Charts | Trade the world. All in one place</title>
+        <title>Nerva.pro | Charts</title>
         <meta name="keywords" content="nerva,tradingview,crypto" />
         <meta name="description" content="Nerva.pro | Charts" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
