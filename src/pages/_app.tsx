@@ -8,8 +8,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <div>
       <Head>
         <title>Vittaverse Charts | Trade the world. All in one place</title>
-        <meta name="keywords" content="vittaverse,forex,tradingview,stocks,mt5,commodities,etf,crypto,economic calender" />
-        <meta name="description" content="Trade the world. All in one place" />
+        <meta name="keywords" content="nerva,tradingview,crypto" />
+        <meta name="description" content="Nerva.pro | Charts" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Component {...pageProps} />
