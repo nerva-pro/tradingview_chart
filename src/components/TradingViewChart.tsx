@@ -59,17 +59,25 @@ function TradingViewChart() {
           watchlist_settings: { default_symbols: [] },
         },
         enabled_features: ["save_chart_properties_to_local_storage","use_localstorage_for_settings","display_legend_on_all_charts","show_exchange_logos","items_favoriting",
-                          "pricescale_currency","show_dom_first_time","show_right_widgets_panel_by_default","show_symbol_logos","show_zoom_and_move_buttons_on_touch",
-                          "snapshot_trading_drawings","show_percent_option_for_right_margin","pricescale_unit","fix_left_edge","use_na_string_for_not_available_values",
-                          "confirm_overwrite_if_chart_layout_with_name_exists","create_volume_indicator_by_default","symbol_info_price_source","end_of_period_timescale_marks",
-                          "header_in_fullscreen_mode","chart_template_storage","iframe_loading_compatibility_mode","side_toolbar_in_fullscreen_mode",
-                          "study_symbol_ticker_description","volume_force_overlay","datasource_copypaste","show_symbol_logo_in_legend","chart_style_hilo",
-                          "charting_library_debug_mode","move_logo_to_main_pane","header_saveload","study_templates","countdown","legend_last_day_change","multiple_watchlists",
-                          "use_last_visible_bar_value_in_legend","no_min_chart_width","legend_inplace_edit","iframe_loading_compatibility_mode","shift_visible_range_on_new_bar",
-                          "request_only_visible_range_on_reset"],
-        disabled_features: ["hide_main_series_symbol_from_indicator_legend","display_market_status","custom_resolutions","tick_resolution",
-                          "disable_resolution_rebuild",]
+                            "pricescale_currency","show_dom_first_time","show_right_widgets_panel_by_default","show_symbol_logos","show_zoom_and_move_buttons_on_touch",
+                            "snapshot_trading_drawings","show_percent_option_for_right_margin","pricescale_unit","fix_left_edge","use_na_string_for_not_available_values",
+                            "confirm_overwrite_if_chart_layout_with_name_exists","create_volume_indicator_by_default","symbol_info_price_source","end_of_period_timescale_marks",
+                            "header_in_fullscreen_mode","chart_template_storage","iframe_loading_compatibility_mode","side_toolbar_in_fullscreen_mode",
+                            "study_symbol_ticker_description","volume_force_overlay","datasource_copypaste","show_symbol_logo_in_legend","chart_style_hilo",
+                            "move_logo_to_main_pane","header_saveload","study_templates","countdown"],
+        disabled_features: ["hide_main_series_symbol_from_indicator_legend","display_market_status","custom_resolutions","tick_resolution","disable_resolution_rebuild"]
                             
+        // enabled_features: ["save_chart_properties_to_local_storage","use_localstorage_for_settings","display_legend_on_all_charts","show_exchange_logos","items_favoriting",
+        //                   "pricescale_currency","show_dom_first_time","show_right_widgets_panel_by_default","show_symbol_logos","show_zoom_and_move_buttons_on_touch",
+        //                   "snapshot_trading_drawings","show_percent_option_for_right_margin","pricescale_unit","fix_left_edge","use_na_string_for_not_available_values",
+        //                   "confirm_overwrite_if_chart_layout_with_name_exists","create_volume_indicator_by_default","symbol_info_price_source","end_of_period_timescale_marks",
+        //                   "header_in_fullscreen_mode","chart_template_storage","iframe_loading_compatibility_mode","side_toolbar_in_fullscreen_mode",
+        //                   "study_symbol_ticker_description","volume_force_overlay","datasource_copypaste","show_symbol_logo_in_legend","chart_style_hilo",
+        //                   "charting_library_debug_mode","move_logo_to_main_pane","header_saveload","study_templates","countdown","legend_last_day_change","multiple_watchlists",
+        //                   "use_last_visible_bar_value_in_legend","no_min_chart_width","legend_inplace_edit","iframe_loading_compatibility_mode","shift_visible_range_on_new_bar",
+        //                   "request_only_visible_range_on_reset"],
+        // disabled_features: ["hide_main_series_symbol_from_indicator_legend","display_market_status","custom_resolutions","tick_resolution",
+        //                   "disable_resolution_rebuild",]           
       });
     }
   }, [systemTheme])
